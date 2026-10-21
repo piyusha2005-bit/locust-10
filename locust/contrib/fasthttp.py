@@ -254,7 +254,7 @@ class FastHttpSession:
         if auth:
             headers["Authorization"] = _construct_basic_auth_str(auth[0], auth[1])
         elif self.auth_header:
-            headers["Authorization"] = self.auth_header
+            headers["Authorization"] = self.auth_header() if callable(self.auth_header) else self.auth_header
         if "Accept-Encoding" not in headers and "accept-encoding" not in headers:
             headers["Accept-Encoding"] = "gzip, deflate, br"
 
